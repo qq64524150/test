@@ -1,0 +1,1 @@
+native2ascii -encoding UTF-8 lable_zh.properties lable_zh_CN.properties 

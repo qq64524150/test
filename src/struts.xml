@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- struts引入资源文件 -->
+	<constant name="struts.custom.i18n.resources" value="com.userInfo.resources.lable"/>
+	<!-- 设置系统属性 -->
+	
+	<constant name="struts.devMode" value="true"/>
+	<constant name="struts.ui.theme" value="simple"/>
+	
+	<package name="com.userinfo" extends="struts-default">
+		<!-- 拦截器 -->
+		<interceptors>
+			<interceptor name="myLogInterceptor" class="com.userInfo.dao.MyLoginInterceptor"/>
+			
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="myLogInterceptor">
+					<param name="excludeMethods">dogoin</param>
+				</interceptor-ref>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+		
+		<!-- 定义公共result -->
+		<global-results>
+			<result name="loginError">/loginError.jsp</result>
+			<result name="error">/error.jsp</result>
+		</global-results>
+		<!-- 公共的异常处理 -->
+		<global-exception-mappings>
+			 <exception-mapping result="error" exception="java.lang.Exception"/>
+		</global-exception-mappings>
+		
+		<action name="actionUserInfo_*" method="{1}" class="com.userInfo.web.UserInfoWeb">
+			<result name="welcome">/welcome.jsp</result>
+			<result name="input">/addUserInfo.jsp</result>
+			<result name="jiazai" type="redirectAction">actionUserInfo_allUserInfo</result>
+			<result name="upUserInfo">upUserInfo.jsp</result>
+			<result name="add">/addUserInfo.jsp</result>
+			<result name="login">/login.jsp</result>
+			<interceptor-ref name="myStack"/>
+		</action>
+		
+	</package>
+</struts>
+
+
+
+
