@@ -17,7 +17,7 @@ import com.userInfo.entity.UserInfo;
 public class UserInfoWeb extends ActionSupport{
 
 	private UserInfo user ;
-	
+	//--修改测试
 	//定义一个File类型的属性,封装上传文件
 	private File userImage ;
 	
